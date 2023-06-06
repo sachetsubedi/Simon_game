@@ -3,6 +3,8 @@ let topLeft = document.getElementById('topLeft')
 let topRight = document.getElementById('topRight');
 let bottomLeft = document.getElementById('bottomLeft');
 let bottomRight = document.getElementById('bottomRight');
+let levelValue=1000;
+
 
 function arrayRandomizer(array) {
     for (let i = 0; i < array.length; i++) {
@@ -30,30 +32,30 @@ function blocksLighter(seq) {
                 topLeft.style.backgroundColor = "white";
                 setTimeout(function () {
                     topLeft.style.backgroundColor = "red";
-                }, 1000);
+                }, levelValue);
             }
             else if (seq[arrIndex] == "topRight") {
                 topRight.style.backgroundColor = "white";
                 setTimeout(function () {
                     topRight.style.backgroundColor = "green";
-                }, 1000);
+                }, levelValue);
             }
             else if (seq[arrIndex] == "bottomLeft") {
                 bottomLeft.style.backgroundColor = "white";
                 setTimeout(function () {
                     bottomLeft.style.backgroundColor = "yellow";
-                }, 1000);
+                }, levelValue);
             }
             else if (seq[arrIndex] == "bottomRight") {
                 bottomRight.style.backgroundColor = "white";
                 setTimeout(function () {
                     bottomRight.style.backgroundColor = "blue";
-                }, 1000);
+                }, levelValue);
             }
             arrIndex++;
             blocksLighter(seq);
 
-        }, 1000)
+        }, levelValue)
     }
 }
 var userInput = [];
@@ -86,4 +88,9 @@ function checker(seq, inp) {
     if (trueCount == 4) {
         display.innerHTML="You win";
     }
+}
+var resetBtn=document.getElementById('restart');
+resetBtn.addEventListener('click',reload);
+function reload(){
+    location.reload();
 }

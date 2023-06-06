@@ -68,3 +68,13 @@ body{
 #topLeft:hover,#bottomLeft:hover,#topRight:hover,#bottomRight:hover{
     box-shadow: inset 0px 0px 1px 5px white;
 }
+.buttons{
+    display: flex;
+}
+#levelValue{
+    padding: 5px;
+    border-radius: 100%;
+    height: 4em;
+    width: 4em;
+    margin-left: 5px;
+}

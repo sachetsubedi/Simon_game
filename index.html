@@ -30,18 +30,26 @@
     </div>
     <div class="middleCircle">
         <div class="buttons">
-            <button id="start">
-                start
-            </button>
+           
             <button id="restart">
                 restart
             </button>
+            <div class="levelSelector">
+               
+                <select name="level" id="levelValue"> 
+                    <option value="1000" onclick="storeLevel(1000)">1</option>
+                    <option value="2500" onclick="storeLevel(2000)">2</option>
+                    <option value="3000" onclick="storeLevel(3000)">3</option>
+                </select>
+            </div>
         </div>
         <div id="displayBox">
-         Play
+         Start
         </div>
     </div>
+    
 </body>
 <script src="script.js"></script>
+
 
 </html>
