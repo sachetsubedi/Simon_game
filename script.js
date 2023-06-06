@@ -56,55 +56,34 @@ function blocksLighter(seq) {
         }, 1000)
     }
 }
+var userInput = [];
 blocksLighter(sequence);
 function clickFinder(name) {
-    console.log(name);
-
-}
-
-var userInput = [];
-var clicks = 0;
-function inputReader() {
-
-    if (clicks < 4) {
-        topLeft.addEventListener('click', function () {
-            userInput.push("topLeft");
-            clicks++;
-        });
-        topRight.addEventListener('click', function () {
-            userInput.push("topRight");
-            clicks++;
-        });
-        bottomLeft.addEventListener('click', function () {
-            userInput.push("bottomLeft");
-            clicks++;
-        });
-        bottomRight.addEventListener('click', function () {
-            userInput.push("bottomRight");
-            clicks++;
-        });
+    userInput.push(name);
+    if(userInput.length==4){
+        checker(sequence,userInput);
     }
+    
 }
-inputReader();
 
+var display=document.getElementById('displayBox');
 
+var clicks = 0;
 
-function checker(seq,inp){
-    trueCount=0;
-    for(let i=0;i<seq.length;i++){
-        if(seq[i]!=inp[i]){
-            return false;
+function checker(seq, inp) {
+    trueCount = 0;
+    for (let i = 0; i < seq.length; i++) {
+        if (seq[i] != inp[i]) {
+            display.innerHTML="You lose";
+      
             break;
         }
-        else
-        trueCount++;
-        continue;
+        else{
+            trueCount++;
+        
+        }
     }
-    if(trueCount==4){
-        return true;
+    if (trueCount == 4) {
+        display.innerHTML="You win";
     }
 }
-
-setTimeout(function(){
-    console.log(checker(sequence,userInput));
-},10000);
