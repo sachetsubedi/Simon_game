@@ -1,0 +1,30 @@
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main{
+    display: flex;
+}
+#topLeft,#topRight,#bottomLeft,#bottomRight{
+    border: 1px solid black;
+    height: 20em;
+    width: 20em;
+}
+#topLeft{
+    border-top-left-radius: 100%;
+    background-color: red;
+}
+#topRight{
+    border-top-right-radius: 100%;
+    background-color: green;
+}
+#bottomLeft{
+    border-bottom-left-radius: 100%;
+    background-color: yellow;
+}
+#bottomRight{
+    border-bottom-right-radius: 100%;
+    background-color: blue;
+}
