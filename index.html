@@ -12,18 +12,18 @@
 <body>
     <div class="main">
         <div>
-            <div id="topLeft" onclick="clickFinder('topLeft')">
+            <div id="topLeft" onclick="clickFinderVar('topLeft')">
 
             </div>
-            <div id="bottomLeft" onclick="clickFinder('bottomLeft')">
+            <div id="bottomLeft" onclick="clickFinderVar('bottomLeft')">
 
             </div>
         </div>
         <div>
-            <div id="topRight" onclick="clickFinder('topRight')">
+            <div id="topRight" onclick="clickFinderVar('topRight')">
 
             </div>
-            <div id="bottomRight" onclick="clickFinder('bottomRight')">
+            <div id="bottomRight" onclick="clickFinderVar('bottomRight')">
 
             </div>
         </div>
@@ -36,10 +36,10 @@
             </button>
             <div class="levelSelector">
                
-                <select name="level" id="levelValue"> 
-                    <option value="1000" onclick="storeLevel(1000)">1</option>
-                    <option value="2500" onclick="storeLevel(2000)">2</option>
-                    <option value="3000" onclick="storeLevel(3000)">3</option>
+                <select name="level" id="levelSelector"> 
+                    <option value="1000" >1</option>
+                    <option value="500" >2</option>
+                    <option value="250" >3</option>
                 </select>
             </div>
         </div>
@@ -47,7 +47,13 @@
          Start
         </div>
     </div>
-    
+    <div class="hints">
+        Hints: <br>
+        Remember the sequence and enter 
+        <br> You can select level form 1-3 (Restart after changing level)
+        <br> Press restart to restart the game
+        
+    </div>
 </body>
 <script src="script.js"></script>
 
