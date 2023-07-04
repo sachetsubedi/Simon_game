@@ -87,3 +87,17 @@ body{
     background: linear-gradient(45deg, purple,rgb(255, 89, 0));
     padding: 10px;
 }
+@media (max-width:700px){
+    #topLeft,#topRight,#bottomLeft,#bottomRight{
+        height: 10em;
+        width: 10em;
+      
+    }
+    .middleCircle{
+        height: 150px;
+        width: 150px;
+    }
+    #displayBox{
+        font-size: large;
+    }
+}
