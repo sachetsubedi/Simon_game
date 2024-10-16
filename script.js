@@ -62,14 +62,15 @@ const removeColor = (index) => {
 };
 
 const start = () => {
-  const generatedSequence = generateSequence(10);
+  const generatedSequence = generateSequence(gameData.level);
   showSequence(generatedSequence);
-
-  document.querySelectorAll(".part").forEach((part, index) => {
-    part.addEventListener("click", (e) => {
-      pulse(index);
-    });
-  });
 };
 
 start();
+
+document.querySelectorAll(".part").forEach((part, index) => {
+  part.addEventListener("click", (e) => {
+    if (gameData.showing) return;
+    pulse(index);
+  });
+});
