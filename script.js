@@ -1,135 +1,60 @@
-let blocks = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
-let topLeft = document.getElementById('topLeft')
-let topRight = document.getElementById('topRight');
-let bottomLeft = document.getElementById('bottomLeft');
-let bottomRight = document.getElementById('bottomRight');
-let levelValue = 1000;
-var resetBtn = document.getElementById('restart');
-var blinking = false;
-var clickFinderVar;
+const gameData = {
+  showing: false,
+  generatedSequence: [],
+  inputSequence: [],
+  level: 1,
+  levelColors: [
+    "bg-red-500",
+    "bg-blue-500",
+    "bg-green-500",
+    "bg-yellow-500",
+    "bg-purple-500",
+    "bg-orange-500",
+    "bg-pink-500",
+    "bg-brown-500",
+    "bg-cyan-500",
+    "bg-magenta-500",
+  ],
+};
 
-let blinks = 0;
-function gamestarter() {
+const delay = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
-    blinks=0;
-    let selectedValue = document.getElementById('levelSelector');
-    levelValue = selectedValue.value;
+const generateSequence = (level) => {
+  const sequence = [];
+  for (let i = 0; i < level; i++) {
+    sequence.push(Math.floor(Math.random() * 8));
+  }
+  gameData.generatedSequence = sequence;
+  return sequence;
+};
 
+const showSequence = async (sequence) => {
+  for (let i = 0; i < sequence.length; i++) {
+    // console.log(sequence[i]);
+    fillColor(sequence[i]);
+    await delay(1000);
+    removeColor(sequence[i]);
+    await delay(200);
+  }
+};
 
+const fillColor = (index) => {
+  document
+    .getElementById(`part${index}`)
+    .classList.replace("bg-slate-300", gameData.levelColors[gameData.level]);
+};
 
-    blinking = true;
-    function arrayRandomizer(array) {
-        for (let i = 0; i < array.length; i++) {
-            let randomInt = Math.floor(Math.random() * array.length);
-            console.log(randomInt);
-            let temp = array[i];
-            array[i] = array[randomInt];
-            array[randomInt] = temp;
-        }
-        return array;
-    }
-    let sequence = arrayRandomizer(blocks);
+const removeColor = (index) => {
+  document
+    .getElementById(`part${index}`)
+    .classList.replace(gameData.levelColors[gameData.level], "bg-slate-300");
+};
 
+const start = () => {
+  const generatedSequence = generateSequence(10);
+  showSequence(generatedSequence);
+};
 
-    console.log(sequence);
-
-    let arrIndex = 0;
-    function blocksLighter(seq) {
-
-
-        if (arrIndex < seq.length) {
-
-            setTimeout(function () {
-                if (seq[arrIndex] == "topLeft") {
-                    topLeft.style.backgroundColor = "grey";
-                    setTimeout(function () {
-                        topLeft.style.backgroundColor = "red";
-                    }, levelValue);
-                    blinks++;
-                }
-                else if (seq[arrIndex] == "topRight") {
-                    topRight.style.backgroundColor = "grey";
-                    setTimeout(function () {
-                        topRight.style.backgroundColor = "green";
-                    }, levelValue);
-                    blinks++;
-                }
-                else if (seq[arrIndex] == "bottomLeft") {
-                    bottomLeft.style.backgroundColor = "grey";
-                    setTimeout(function () {
-                        bottomLeft.style.backgroundColor = "yellow";
-                    }, levelValue);
-                    blinks++;
-                }
-                else if (seq[arrIndex] == "bottomRight") {
-                    bottomRight.style.backgroundColor = "grey";
-                    setTimeout(function () {
-                        bottomRight.style.backgroundColor = "blue";
-                    }, levelValue);
-                    blinks++;
-                }
-                var display = document.getElementById('displayBox');
-                display.innerHTML = "Wait";
-                arrIndex++;
-                if (blinks == 4) {
-                    setTimeout(function () {
-                        blinking = false;
-                        var display = document.getElementById('displayBox');
-                        display.innerHTML = "Wait";
-
-                        display.innerHTML = "Start"
-                    }, 1000)
-
-                }
-                blocksLighter(seq);
-
-
-            }, levelValue)
-        }
-
-    }
-
-
-    var userInput = [];
-    blocksLighter(sequence);
-    clickFinderVar = function clickFinder(name) {
-        userInput.push(name);
-        if (userInput.length == 4) {
-            checker(sequence, userInput);
-
-        }
-
-    }
-
-    var display = document.getElementById('displayBox');
-
-
-
-    function checker(seq, inp) {
-        trueCount = 0;
-        for (let i = 0; i < seq.length; i++) {
-            if (seq[i] != inp[i]) {
-                display.innerHTML = "You lose";
-
-                break;
-            }
-            else {
-                trueCount++;
-
-            }
-        }
-        if (trueCount == 4) {
-            display.innerHTML = "You win";
-        }
-    }
-
-}
-
-gamestarter();
-
-resetBtn.addEventListener('click', function () {
-    if (!blinking) {
-        gamestarter();
-
-    }
-})
+start();

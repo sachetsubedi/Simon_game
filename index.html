@@ -1,61 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Simon</title>
-</head>
+  </head>
 
-<body>
-    <div class="main">
-        <div>
-            <div id="topLeft" onclick="clickFinderVar('topLeft')">
-
-            </div>
-            <div id="bottomLeft" onclick="clickFinderVar('bottomLeft')">
-
-            </div>
-        </div>
-        <div>
-            <div id="topRight" onclick="clickFinderVar('topRight')">
-
-            </div>
-            <div id="bottomRight" onclick="clickFinderVar('bottomRight')">
-
-            </div>
-        </div>
+  <body class="bg-slate-500">
+    <div class="flex justify-center items-center h-screen">
+      <div class="parts grid grid-cols-4 border border-slate-200 p-2 gap-1">
+        <div
+          id="part0"
+          class="h-40 w-40 bg-slate-300 cursor-pointer transition-all ease-in-out"
+        ></div>
+        <div
+          id="part1"
+          class="h-40 w-40 bg-slate-300 cursor-pointer transition-all ease-in-out"
+        ></div>
+        <div
+          id="part2"
+          class="h-40 w-40 bg-slate-300 cursor-pointer transition-all ease-in-out"
+        ></div>
+        <div
+          id="part3"
+          class="h-40 w-40 bg-slate-300 cursor-pointer transition-all ease-in-out"
+        ></div>
+        <div
+          id="part4"
+          class="h-40 w-40 bg-slate-300 cursor-pointer transition-all ease-in-out"
+        ></div>
+        <div
+          id="part5"
+          class="h-40 w-40 bg-slate-300 cursor-pointer transition-all ease-in-out"
+        ></div>
+        <div
+          id="part6"
+          class="h-40 w-40 bg-slate-300 cursor-pointer transition-all ease-in-out"
+        ></div>
+        <div
+          id="part7"
+          class="h-40 w-40 bg-slate-300 cursor-pointer transition-all ease-in-out"
+        ></div>
+      </div>
     </div>
-    <div class="middleCircle">
-        <div class="buttons">
-           
-            <button id="restart">
-                restart
-            </button>
-            <div class="levelSelector">
-               
-                <select name="level" id="levelSelector"> 
-                    <option value="1000" >1</option>
-                    <option value="500" >2</option>
-                    <option value="250" >3</option>
-                </select>
-            </div>
-        </div>
-        <div id="displayBox">
-         Start
-        </div>
-    </div>
-    <div class="hints">
-        Hints: <br>
-        Remember the sequence and enter 
-        <br> You can select level form 1-3 (Restart after changing level)
-        <br> Press restart to restart the game
-        
-    </div>
-</body>
-<script src="script.js"></script>
-
-
+  </body>
+  <script src="script.js"></script>
 </html>
