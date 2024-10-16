@@ -31,6 +31,7 @@ const generateSequence = (level) => {
 };
 
 const showSequence = async (sequence) => {
+  gameData.showing = true;
   for (let i = 0; i < sequence.length; i++) {
     // console.log(sequence[i]);
     fillColor(sequence[i]);
@@ -38,6 +39,14 @@ const showSequence = async (sequence) => {
     removeColor(sequence[i]);
     await delay(200);
   }
+  gameData.showing = false;
+};
+
+const pulse = (index) => {
+  fillColor(index);
+  setTimeout(() => {
+    removeColor(index);
+  }, 200);
 };
 
 const fillColor = (index) => {
@@ -55,6 +64,12 @@ const removeColor = (index) => {
 const start = () => {
   const generatedSequence = generateSequence(10);
   showSequence(generatedSequence);
+
+  document.querySelectorAll(".part").forEach((part, index) => {
+    part.addEventListener("click", (e) => {
+      pulse(index);
+    });
+  });
 };
 
 start();
