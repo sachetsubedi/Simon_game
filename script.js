@@ -2,7 +2,7 @@ const gameData = {
   showing: false,
   generatedSequence: [],
   inputSequence: [],
-  level: 1,
+  level: 0,
   levelColors: [
     "bg-red-500",
     "bg-blue-500",
@@ -52,16 +52,45 @@ const pulse = (index) => {
 const fillColor = (index) => {
   document
     .getElementById(`part${index}`)
-    .classList.replace("bg-slate-300", gameData.levelColors[gameData.level]);
+    .classList.replace(
+      "bg-slate-300",
+      gameData.levelColors[gameData.level - 1]
+    );
 };
 
 const removeColor = (index) => {
   document
     .getElementById(`part${index}`)
-    .classList.replace(gameData.levelColors[gameData.level], "bg-slate-300");
+    .classList.replace(
+      gameData.levelColors[gameData.level - 1],
+      "bg-slate-300"
+    );
+};
+
+const clearBoard = () => {
+  const elements = document.querySelectorAll(".part");
+  elements.forEach((element) => {
+    gameData.levelColors.forEach((color) => {
+      element.classList.remove(color);
+    });
+    element.classList.add("bg-slate-300");
+  });
+};
+
+const checkSequence = () => {
+  return (
+    gameData.generatedSequence.toString() === gameData.inputSequence.toString()
+  );
 };
 
 const start = () => {
+  // reset all the values
+  gameData.showing = false;
+  gameData.generatedSequence = [];
+  gameData.inputSequence = [];
+  clearBoard();
+  gameData.level++;
+
   const generatedSequence = generateSequence(gameData.level);
   showSequence(generatedSequence);
 };
@@ -71,6 +100,25 @@ start();
 document.querySelectorAll(".part").forEach((part, index) => {
   part.addEventListener("click", (e) => {
     if (gameData.showing) return;
+
+    console.log(gameData);
+
     pulse(index);
+
+    // add the index to the input sequence
+    if (gameData.inputSequence.length != gameData.generatedSequence.length)
+      gameData.inputSequence.push(index);
+
+    // check if the input sequence is equal to the generated sequence
+    if (gameData.inputSequence.length === gameData.generatedSequence.length) {
+      if (checkSequence()) {
+        gameData.level++;
+        start();
+      } else {
+        alert("Game Over!");
+        gameData.level = 0;
+        clearBoard();
+      }
+    }
   });
 });
