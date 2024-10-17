@@ -140,7 +140,6 @@ document.querySelectorAll(".part").forEach((part, index) => {
       gameData.inputSequence.push(index);
 
     // check if the input sequence is equal to the generated sequence
-    // if (gameData.inputSequence.length === gameData.generatedSequence.length) {
     if (checkSequence()) {
       await delay(1000);
 
@@ -151,7 +150,6 @@ document.querySelectorAll(".part").forEach((part, index) => {
       gameData.level = 0;
       clearBoard();
     }
-    // }
   });
 });
 
