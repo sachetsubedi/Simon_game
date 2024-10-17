@@ -134,10 +134,16 @@ document.querySelectorAll(".part").forEach((part, index) => {
       if (checkSequence()) {
         start();
       } else {
-        alert("Game Over!");
+        // alert("Game Over!");
+        document.getElementById("youLose").classList.remove("hidden");
         gameData.level = 0;
         clearBoard();
       }
     }
   });
+});
+
+document.getElementById("restart").addEventListener("click", () => {
+  document.getElementById("youLose").classList.add("hidden");
+  start();
 });
