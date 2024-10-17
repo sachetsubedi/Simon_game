@@ -15,6 +15,7 @@ const gameData = {
     "bg-cyan-500",
     "bg-magenta-500",
   ],
+  gameStarted: false,
 };
 
 const delay = (ms) => {
@@ -60,9 +61,11 @@ const setShowing = () => {
   if (gameData.showing) {
     showDiv.classList.add("bg-red-500");
     showDiv.classList.remove("bg-green-500");
+    showDiv.classList.remove("bg-slate-300");
   } else {
     showDiv.classList.add("bg-green-500");
     showDiv.classList.remove("bg-red-500");
+    showDiv.classList.remove("bg-slate-300");
   }
 };
 
@@ -95,9 +98,13 @@ const clearBoard = () => {
 };
 
 const checkSequence = () => {
-  return (
-    gameData.generatedSequence.toString() === gameData.inputSequence.toString()
-  );
+  let correct = true;
+  gameData.inputSequence.forEach((item, index) => {
+    if (item !== gameData.generatedSequence[index]) {
+      correct = false;
+    }
+  });
+  return correct;
 };
 
 const start = () => {
@@ -115,10 +122,13 @@ const start = () => {
   showSequence(generatedSequence);
 };
 
-start();
+document.getElementById("start").addEventListener("click", () => {
+  document.getElementById("startPage").classList.add("hidden");
+  start();
+});
 
 document.querySelectorAll(".part").forEach((part, index) => {
-  part.addEventListener("click", (e) => {
+  part.addEventListener("click", async (e) => {
     if (gameData.showing) return;
 
     console.log(gameData);
@@ -130,16 +140,18 @@ document.querySelectorAll(".part").forEach((part, index) => {
       gameData.inputSequence.push(index);
 
     // check if the input sequence is equal to the generated sequence
-    if (gameData.inputSequence.length === gameData.generatedSequence.length) {
-      if (checkSequence()) {
+    // if (gameData.inputSequence.length === gameData.generatedSequence.length) {
+    if (checkSequence()) {
+      await delay(1000);
+
+      if (gameData.inputSequence.length === gameData.generatedSequence.length)
         start();
-      } else {
-        // alert("Game Over!");
-        document.getElementById("youLose").classList.remove("hidden");
-        gameData.level = 0;
-        clearBoard();
-      }
+    } else {
+      document.getElementById("youLose").classList.remove("hidden");
+      gameData.level = 0;
+      clearBoard();
     }
+    // }
   });
 });
 
