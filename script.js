@@ -32,6 +32,7 @@ const generateSequence = (level) => {
 
 const showSequence = async (sequence) => {
   gameData.showing = true;
+  setShowing();
   for (let i = 0; i < sequence.length; i++) {
     // console.log(sequence[i]);
     fillColor(sequence[i]);
@@ -40,6 +41,7 @@ const showSequence = async (sequence) => {
     await delay(200);
   }
   gameData.showing = false;
+  setShowing();
 };
 
 const pulse = (index) => {
@@ -47,6 +49,21 @@ const pulse = (index) => {
   setTimeout(() => {
     removeColor(index);
   }, 200);
+};
+
+const setShowing = () => {
+  const showDiv = document.getElementById("showing");
+  showDiv.innerHTML = gameData.showing
+    ? "Watch Carefully"
+    : "Input the Sequence";
+
+  if (gameData.showing) {
+    showDiv.classList.add("bg-red-500");
+    showDiv.classList.remove("bg-green-500");
+  } else {
+    showDiv.classList.add("bg-green-500");
+    showDiv.classList.remove("bg-red-500");
+  }
 };
 
 const fillColor = (index) => {
@@ -91,6 +108,9 @@ const start = () => {
   clearBoard();
   gameData.level++;
 
+  // Get the game level in ui
+  document.getElementById("level").innerText = gameData.level;
+
   const generatedSequence = generateSequence(gameData.level);
   showSequence(generatedSequence);
 };
@@ -112,7 +132,6 @@ document.querySelectorAll(".part").forEach((part, index) => {
     // check if the input sequence is equal to the generated sequence
     if (gameData.inputSequence.length === gameData.generatedSequence.length) {
       if (checkSequence()) {
-        gameData.level++;
         start();
       } else {
         alert("Game Over!");
