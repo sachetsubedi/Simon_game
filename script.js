@@ -109,6 +109,7 @@ const checkSequence = () => {
 
 const start = () => {
   // reset all the values
+  if (!gameData.gameStarted) return;
   gameData.showing = false;
   gameData.generatedSequence = [];
   gameData.inputSequence = [];
@@ -117,6 +118,22 @@ const start = () => {
 
   // Get the game level in ui
   document.getElementById("level").innerText = gameData.level;
+  // set the level box color with tyhe level color
+  if (gameData.level == 1) {
+    document
+      .getElementById("level")
+      .classList.replace(
+        "bg-slate-300",
+        gameData.levelColors[gameData.level - 1]
+      );
+  } else {
+    document
+      .getElementById("level")
+      .classList.replace(
+        gameData.levelColors[gameData.level - 2],
+        gameData.levelColors[gameData.level - 1]
+      );
+  }
 
   const generatedSequence = generateSequence(gameData.level);
   showSequence(generatedSequence);
@@ -124,6 +141,7 @@ const start = () => {
 
 document.getElementById("start").addEventListener("click", () => {
   document.getElementById("startPage").classList.add("hidden");
+  gameData.gameStarted = true;
   start();
 });
 
@@ -131,13 +149,14 @@ document.querySelectorAll(".part").forEach((part, index) => {
   part.addEventListener("click", async (e) => {
     if (gameData.showing) return;
 
-    console.log(gameData);
-
     pulse(index);
 
     // add the index to the input sequence
     if (gameData.inputSequence.length != gameData.generatedSequence.length)
       gameData.inputSequence.push(index);
+
+    console.log(gameData.inputSequence);
+    console.log(gameData.generatedSequence);
 
     // check if the input sequence is equal to the generated sequence
     if (checkSequence()) {
@@ -145,9 +164,18 @@ document.querySelectorAll(".part").forEach((part, index) => {
 
       if (gameData.inputSequence.length === gameData.generatedSequence.length)
         start();
+
+      console.log("Correct");
     } else {
       document.getElementById("youLose").classList.remove("hidden");
+      document
+        .getElementById("level")
+        .classList.replace(
+          gameData.levelColors[gameData.level - 1],
+          "bg-slate-300"
+        );
       gameData.level = 0;
+      gameData.gameStarted = false;
       clearBoard();
     }
   });
@@ -155,5 +183,6 @@ document.querySelectorAll(".part").forEach((part, index) => {
 
 document.getElementById("restart").addEventListener("click", () => {
   document.getElementById("youLose").classList.add("hidden");
+  gameData.gameStarted = true;
   start();
 });
