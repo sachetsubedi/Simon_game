@@ -35,7 +35,6 @@ const showSequence = async (sequence) => {
   gameData.showing = true;
   setShowing();
   for (let i = 0; i < sequence.length; i++) {
-    // console.log(sequence[i]);
     fillColor(sequence[i]);
     await delay(1000);
     removeColor(sequence[i]);
@@ -155,17 +154,12 @@ document.querySelectorAll(".part").forEach((part, index) => {
     if (gameData.inputSequence.length != gameData.generatedSequence.length)
       gameData.inputSequence.push(index);
 
-    console.log(gameData.inputSequence);
-    console.log(gameData.generatedSequence);
-
     // check if the input sequence is equal to the generated sequence
     if (checkSequence()) {
       await delay(1000);
 
       if (gameData.inputSequence.length === gameData.generatedSequence.length)
         start();
-
-      console.log("Correct");
     } else {
       document.getElementById("youLose").classList.remove("hidden");
       document
