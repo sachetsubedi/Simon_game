@@ -15,6 +15,10 @@ const gameData = {
     "bg-cyan-500",
     "bg-magenta-500",
   ],
+  sounds: {
+    correct: new Audio("./assets/sounds/correct.wav"),
+    fail: new Audio("./assets/sounds/fail.mp3"),
+  },
   gameStarted: false,
 };
 
@@ -168,10 +172,11 @@ document.querySelectorAll(".part").forEach((part, index) => {
 
     // check if the input sequence is equal to the generated sequence
     if (checkSequence()) {
-      await delay(1000);
-
-      if (gameData.inputSequence.length === gameData.generatedSequence.length)
+      if (gameData.inputSequence.length === gameData.generatedSequence.length) {
+        gameData.sounds.correct.play();
+        await delay(1000);
         start();
+      }
     } else {
       document.getElementById("youLose").classList.remove("hidden");
       document
@@ -180,6 +185,7 @@ document.querySelectorAll(".part").forEach((part, index) => {
           gameData.levelColors[gameData.level - 1],
           "bg-slate-300"
         );
+      gameData.sounds.fail.play();
       gameData.level = 0;
       gameData.gameStarted = false;
       clearBoard();

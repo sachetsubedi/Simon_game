@@ -20,7 +20,7 @@ Welcome to the Simon Game! This is a simple and fun memory game where you need t
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/simon-game.git
+   git clone https://github.com/sachetsubedi/simon_game.git
    ```
 2. Open the `index.html` file in your browser to start playing.
 
