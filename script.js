@@ -68,6 +68,16 @@ const setShowing = () => {
   }
 };
 
+const computeHighScore = () => {
+  let highScore = localStorage.getItem("highScore");
+  if (!highScore) highScore = 0;
+  if (gameData.level > Number(highScore)) {
+    localStorage.setItem("highScore", gameData.level);
+    highScore = gameData.level;
+  }
+  document.getElementById("highScore").innerText = highScore;
+};
+
 const fillColor = (index) => {
   document
     .getElementById(`part${index}`)
@@ -114,6 +124,8 @@ const start = () => {
   gameData.inputSequence = [];
   clearBoard();
   gameData.level++;
+
+  computeHighScore();
 
   // Get the game level in ui
   document.getElementById("level").innerText = gameData.level;
