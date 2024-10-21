@@ -9,22 +9,27 @@
     <title>Simon</title>
   </head>
 
-  <body class="bg-slate-500">
+  <body class="bg-slate-500 flex justify-center items-center">
     <div class="flex flex-col justify-center items-center h-screen gap-2">
-      <div class="scoreBoard flex items-center w-[670px] justify-between">
+      <div class="scoreBoard flex items-center w-full justify-between">
         <h1
-          class="text-4xl text-white bg-slate-300 p-5 rounded-md"
+          class="text-md font-bold md:text-4xl text-white bg-slate-300 p-5 rounded-md"
           id="showing"
         >
           Simon
         </h1>
 
-        <h2 class="text-white text-4xl bg-slate-300 p-5 rounded-md" id="level">
+        <h2
+          class="text-white font-bold text-md md:text-4xl bg-slate-300 p-5 rounded-md"
+          id="level"
+        >
           0
         </h2>
       </div>
 
-      <div class="parts grid grid-cols-4 border border-slate-200 p-2 gap-1">
+      <div
+        class="parts grid grid-cols-2 md:grid-cols-4 border border-slate-200 p-2 gap-1"
+      >
         <div
           id="part0"
           class="h-40 w-40 part bg-slate-300 cursor-pointer transition-all ease-in-out"
@@ -79,7 +84,7 @@
 
     <div
       id="startPage"
-      class="absolute h-screen w-full top-0 left-0 bg-blue-500 opacity-65 flex items-center justify-center"
+      class="absolute h-screen w-full top-0 left-0 bg-blue-500 opacity-65 flex items-center justify-center px-5"
     >
       <div
         class="howToPlay text-white font-bold flex flex-col justify-center items-center gap-10"
